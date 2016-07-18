@@ -10,18 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
-const http_1 = require('@angular/http');
 const transaction_service_1 = require('./transaction.service');
-let AppComponent = class AppComponent {
+let DashboardComponent = class DashboardComponent {
+    constructor(router, transactionService) {
+        this.router = router;
+        this.transactionService = transactionService;
+        this.transactions = [];
+    }
+    ngOnInit() {
+        this.transactionService.getTransactions().then(transactions => this.transactions = transactions.slice(0, 1));
+    }
+    goToDetail(transaction) {
+        let link = ['/detail', transaction.id];
+        this.router.navigate(link);
+    }
 };
-AppComponent = __decorate([
+DashboardComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        templateUrl: 'includes/app.component.html',
-        directives: [router_1.ROUTER_DIRECTIVES],
-        providers: [transaction_service_1.TransactionService, http_1.HTTP_PROVIDERS],
+        selector: 'dashboard',
+        templateUrl: 'includes/dashboard.component.html'
     }), 
-    __metadata('design:paramtypes', [])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+    __metadata('design:paramtypes', [router_1.Router, transaction_service_1.TransactionService])
+], DashboardComponent);
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map

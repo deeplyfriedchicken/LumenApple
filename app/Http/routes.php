@@ -16,10 +16,18 @@ $app->get('/version', function () use ($app) {
 });
 
 $app->get('/', function () use ($app) {
-    return view('home');
+    return view('index');
 });
-
-  $app->group(['prefix' => 'transactions', 'namespace' => 'App\Http\Controllers'], function ($app) {
+$app->get('/transactions', function () use ($app) {
+    return view('index');
+});
+$app->get('/dashboard', function () use ($app) {
+  return view('index');
+});
+$app->get('detail/{id}', function ($id) {
+    return view('index');
+});
+  $app->group(['prefix' => 'transactions-api', 'namespace' => 'App\Http\Controllers'], function ($app) {
       // Returns all the transactions
       // GET http://localhost:8000/transactions
       $app->get('/', 'TransactionsController@index');

@@ -1,0 +1,10 @@
+<tr>
+  <div *ngIf="transactionItem">
+    <td><a href="pages/examples/invoice.html">{{ transactionItem.check_number }}</a></td>
+    <td>{{ transactionItem.payee }}</td>
+    <td><span class="label label-success">{{ transactionItem.credit }}</span></td>
+    <td><span class="label label-success">{{ transactionItem.debit }}</span></td>
+    <td><span>{{transactionItem.description }}</span></td>
+    <td><span>{{ transactionItem.amount }}</span></td>
+  </div>
+</tr>

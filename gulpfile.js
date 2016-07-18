@@ -14,7 +14,7 @@ var elixirTypscript = require('elixir-typescript');
 elixir(function(mix) {
     mix.sass('app.scss');
 
-    mix.copy('node_modules/angular2', 'public/angular2');
+    mix.copy('node_modules/@angular', 'public/@angular');
     mix.copy('node_modules/rxjs', 'public/rxjs');
     mix.copy('node_modules/systemjs', 'public/systemjs');
     mix.copy('node_modules/es6-promise', 'public/es6-promise');
@@ -29,12 +29,17 @@ elixir(function(mix) {
         [
             'app.component.ts',
             'main.ts',
-            'home-graph.component.ts',
-            'add-transaction-form.component.ts',
+            'dashboard.component.ts',
+            'transaction-detail.component.ts',
+            'transaction.ts',
+            'transaction.service.ts',
+            'transactions.component.ts',
+            'mock-transactions.ts',
+            'app.routes.ts',
         ],
         'public/',
         {
-            "target": "es5",
+            "target": "es6",
             "module": "system",
             "moduleResolution": "node",
             "sourceMap": true,

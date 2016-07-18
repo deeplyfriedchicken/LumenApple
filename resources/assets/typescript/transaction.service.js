@@ -8,18 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var TransactionSummaryComponent = (function () {
-    function TransactionSummaryComponent() {
+const core_1 = require('@angular/core');
+const mock_transactions_1 = require('./mock-transactions');
+let TransactionService = class TransactionService {
+    getTransactions() {
+        return Promise.resolve(mock_transactions_1.TRANSACTIONS);
     }
-    TransactionSummaryComponent = __decorate([
-        core_1.Component({
-            selector: 'transaction-summary',
-            templateUrl: 'includes/transaction-summary.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TransactionSummaryComponent);
-    return TransactionSummaryComponent;
-}());
-exports.TransactionSummaryComponent = TransactionSummaryComponent;
-//# sourceMappingURL=transaction-summary.component.js.map
+    getTransaction(id) {
+        return this.getTransactions().then(transactions => transactions.find(transaction => transaction.id === id));
+    }
+};
+TransactionService = __decorate([
+    core_1.Injectable(), 
+    __metadata('design:paramtypes', [])
+], TransactionService);
+exports.TransactionService = TransactionService;
+//# sourceMappingURL=transaction.service.js.map

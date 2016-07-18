@@ -1,10 +1,6 @@
-///<reference path="../../../node_modules/angular2/typings/browser.d.ts"/>
+import { bootstrap }    from '@angular/platform-browser-dynamic';
 
-import {bootstrap}    from 'angular2/platform/browser';
-import {HomeGraphComponent} from './home-graph.component';
-import {TransactionSummaryComponent} from './transaction-summary.component';
-import {AddTransactionFormComponent} from './add-transaction-form.component';
+import { AppComponent } from './app.component';
+import { appRouterProviders } from './app.routes';
 
-bootstrap(HomeGraphComponent);
-bootstrap(TransactionSummaryComponent);
-bootstrap(AddTransactionFormComponent);
+bootstrap(AppComponent, [appRouterProviders]);
