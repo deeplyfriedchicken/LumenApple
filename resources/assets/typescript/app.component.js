@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const http_1 = require('@angular/http');
+require('./rxjs-operators');
 const transaction_service_1 = require('./transaction.service');
 let AppComponent = class AppComponent {
 };

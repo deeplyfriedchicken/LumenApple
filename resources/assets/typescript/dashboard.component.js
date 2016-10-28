@@ -16,13 +16,18 @@ let DashboardComponent = class DashboardComponent {
         this.router = router;
         this.transactionService = transactionService;
         this.transactions = [];
+        this.mode = 'Observable';
     }
     ngOnInit() {
-        this.transactionService.getTransactions().then(transactions => this.transactions = transactions.slice(0, 1));
+        this.transactionService.getTransactions()
+            .subscribe(transactions => this.transactions = transactions, error => this.errorMessage = error);
     }
     goToDetail(transaction) {
         let link = ['/detail', transaction.id];
         this.router.navigate(link);
+    }
+    onSelect(transaction) {
+        this.selectedTransaction = transaction;
     }
 };
 DashboardComponent = __decorate([

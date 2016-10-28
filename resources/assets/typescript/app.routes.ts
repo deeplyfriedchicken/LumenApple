@@ -9,6 +9,10 @@ const routes: RouterConfig = [
       path: 'transactions',
       component: TransactionsComponent
     },
+    // {
+    //   path: 'transactions/add',
+    //   component: TransactionsFormComponent
+    // },
     {
       path: 'dashboard',
       component: DashboardComponent

@@ -20,6 +20,7 @@ elixir(function(mix) {
     mix.copy('node_modules/es6-promise', 'public/es6-promise');
     mix.copy('node_modules/es6-shim', 'public/es6-shim');
     mix.copy('node_modules/zone.js', 'public/zone.js');
+    mix.copy('node_modules/angular2', 'public/angular2');
     mix.copy('resources/assets/bootstrap', 'public/assets/bootstrap');
     mix.copy('resources/assets/dist', 'public/assets/dist');
     mix.copy('resources/assets/plugins', 'public/assets/plugins');
@@ -36,6 +37,7 @@ elixir(function(mix) {
             'transactions.component.ts',
             'mock-transactions.ts',
             'app.routes.ts',
+            'rxjs-operators.ts',
         ],
         'public/',
         {

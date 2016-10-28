@@ -27,7 +27,7 @@ $app->get('/dashboard', function () use ($app) {
 $app->get('detail/{id}', function ($id) {
     return view('index');
 });
-  $app->group(['prefix' => 'transactions-api', 'namespace' => 'App\Http\Controllers'], function ($app) {
+  $app->group(['prefix' => 'api/transactions', 'namespace' => 'App\Http\Controllers'], function ($app) {
       // Returns all the transactions
       // GET http://localhost:8000/transactions
       $app->get('/', 'TransactionsController@index');

@@ -8,6 +8,10 @@ const routes = [
         path: 'transactions',
         component: transactions_component_1.TransactionsComponent
     },
+    // {
+    //   path: 'transactions/add',
+    //   component: TransactionsFormComponent
+    // },
     {
         path: 'dashboard',
         component: dashboard_component_1.DashboardComponent

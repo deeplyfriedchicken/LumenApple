@@ -9,22 +9,35 @@ import {TransactionService} from './transaction.service';
     templateUrl: 'includes/transaction-item-list.html'
 })
 export class TransactionsComponent implements OnInit {
-  title = "Transaction History";
+  errorMessage: string;
   transactions: Transaction[];
+  transaction: Transaction;
   selectedTransaction: Transaction;
+  mode = 'Observable';
 
   constructor(private transactionService: TransactionService) {}
 
   getTransactions() {
-    this.transactionService.getTransactions().then(transactions => this.transactions = transactions);
+    this.transactionService.getTransactions()
+                      .subscribe(
+                        transactions => this.transactions = transactions,
+                        error => this.errorMessage = <any>error);
   }
 
   ngOnInit() {
     this.getTransactions();
   }
-
+  addTransaction(id: number, payee: string) {
+    if(!payee) { return; }
+    this.transactionService.addTransaction(id, payee)
+                              .subscribe(
+                                transaction => this.transactions = transaction,
+                                error => this.errorMessage = <any>error
+                              );
+  }
   onSelect(transaction: Transaction) {
     this.selectedTransaction = transaction;
   }
+
 
 }

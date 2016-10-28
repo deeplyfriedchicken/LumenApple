@@ -8,33 +8,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var transaction_detail_component_1 = require('./transaction-detail.component');
-var transaction_service_1 = require('./transaction.service');
-var TransactionsComponent = (function () {
-    function TransactionsComponent(transactionService) {
+const core_1 = require('@angular/core');
+const transaction_detail_component_1 = require('./transaction-detail.component');
+const transaction_service_1 = require('./transaction.service');
+let TransactionsComponent = class TransactionsComponent {
+    constructor(transactionService) {
         this.transactionService = transactionService;
-        this.title = "Transaction History";
+        this.mode = 'Observable';
     }
-    TransactionsComponent.prototype.getTransactions = function () {
-        var _this = this;
-        this.transactionService.getTransactions().then(function (transactions) { return _this.transactions = transactions; });
-    };
-    TransactionsComponent.prototype.ngOnInit = function () {
+    getTransactions() {
+        this.transactionService.getTransactions()
+            .subscribe(transactions => this.transactions = transactions, error => this.errorMessage = error);
+    }
+    ngOnInit() {
         this.getTransactions();
-    };
-    TransactionsComponent.prototype.onSelect = function (transaction) {
+    }
+    addTransaction(id, payee) {
+        if (!payee) {
+            return;
+        }
+        this.transactionService.addTransaction(id, payee)
+            .subscribe(transaction => this.transactions = transaction, error => this.errorMessage = error);
+    }
+    onSelect(transaction) {
         this.selectedTransaction = transaction;
-    };
-    TransactionsComponent = __decorate([
-        core_1.Component({
-            selector: 'trans-app',
-            directives: [transaction_detail_component_1.TransactionDetailComponent],
-            templateUrl: 'includes/transaction-item-list.html'
-        }), 
-        __metadata('design:paramtypes', [transaction_service_1.TransactionService])
-    ], TransactionsComponent);
-    return TransactionsComponent;
-}());
+    }
+};
+TransactionsComponent = __decorate([
+    core_1.Component({
+        selector: 'trans-app',
+        directives: [transaction_detail_component_1.TransactionDetailComponent],
+        templateUrl: 'includes/transaction-item-list.html'
+    }), 
+    __metadata('design:paramtypes', [transaction_service_1.TransactionService])
+], TransactionsComponent);
 exports.TransactionsComponent = TransactionsComponent;
 //# sourceMappingURL=transactions.component.js.map

@@ -39,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="angular2/bundles/angular2-polyfills.js"></script>
   <script src="systemjs/dist/system.src.js"></script>
   <script src="rxjs/bundles/Rx.js"></script>
-  <script src="angular2/bundles/angular2.dev.js"></script>
+  <script src="angular2/bundles/http.dev.js"></script>
   @include('index-system-js')
 </head>
 <!--

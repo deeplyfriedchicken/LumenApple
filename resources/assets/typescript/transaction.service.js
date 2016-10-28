@@ -9,18 +9,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const mock_transactions_1 = require('./mock-transactions');
+const http_1 = require('@angular/http');
+const http_2 = require('@angular/http');
+require('rxjs/Rx'); // importing RxJs operators like map
+const Observable_1 = require('rxjs/Observable');
 let TransactionService = class TransactionService {
+    constructor(_http) {
+        this._http = _http;
+        this.transactionsUrl = "/api/transactions";
+    }
     getTransactions() {
-        return Promise.resolve(mock_transactions_1.TRANSACTIONS);
+        let transactions$ = this._http.get(this.transactionsUrl)
+            .map(this.mapTransactions);
+        console.log(transactions$);
+        return transactions$;
     }
     getTransaction(id) {
-        return this.getTransactions().then(transactions => transactions.find(transaction => transaction.id === id));
+        let transaction = this._http.get(this.transactionsUrl + '/' + `id`).map(this.mapTransactions);
+        return transaction;
+    }
+    addTransaction(id, payee) {
+        let body = JSON.stringify({ id, payee });
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        let options = new http_2.RequestOptions({ headers: headers });
+        return this._http.post(this.transactionsUrl, body, options)
+            .map(this.mapTransactions);
+    }
+    mapTransactions(res) {
+        return res.json();
+    }
+    handleError(error) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        let errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable_1.Observable.throw(errMsg);
     }
 };
 TransactionService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [http_1.Http])
 ], TransactionService);
 exports.TransactionService = TransactionService;
 //# sourceMappingURL=transaction.service.js.map
